@@ -19,7 +19,7 @@ public class Client {
 		
 		resposta = br.readLine();
 		System.out.println(resposta);
-		updatePosition("RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr");
+		updatePosition("1RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr");
 		print();
 		if(resposta.matches("nao")){
 			while(!resposta.matches("afogamento") && !resposta.matches("Vitoria das brancas.") 
@@ -36,13 +36,15 @@ public class Client {
 
 				resposta = br.readLine();
 				if(!resposta.matches("bizonhou")){
-					if(updatePosition(resposta))
+					if(updatePosition(resposta)){
+						print();
 						break;
-					print();
+					}
 					resposta = br.readLine();
-					if(updatePosition(resposta))
+					if(updatePosition(resposta)){
+						print();
 						break;
-					print();
+					}
 				}
 			}
 		}
@@ -51,9 +53,10 @@ public class Client {
 					&& !resposta.matches("Vitoria das pretas.")){
 				if(!resposta.matches("bizonhou")){	
 					resposta = br.readLine();
-					if(updatePosition(resposta))
+					if(updatePosition(resposta)){
+						print();
 						break;
-					print();
+					}
 				}
 				x0 = scan.nextInt();
 				y0 = scan.nextInt();
@@ -65,12 +68,14 @@ public class Client {
 				ps.print(y1);
 				resposta = br.readLine();
 				if(!resposta.matches("bizonhou")){
-					if(updatePosition(resposta))
+					if(updatePosition(resposta)){
+						print();
 						break;
-					print();
+					}
 				}
 			}
 		}
+		resposta = br.readLine();
 		System.out.println(resposta);
 	}
 
