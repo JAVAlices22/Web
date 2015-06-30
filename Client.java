@@ -18,6 +18,18 @@ public class Client {
 		
 		int x0, x1, y0, y1;
 		
+		//Login
+		resposta = br.readLine();
+		System.out.println(resposta);
+		ps.println(scan.nextLine());
+		ps.println(scan.nextLine());
+		resposta = br.readLine();
+		if(resposta.matches("falha")){
+			System.out.println("Conexão mal sucedida.");
+			return;
+		}
+		
+		
 		 //Atribuir cor das peças ao cliente e inicializar tabuleiro
 		resposta = br.readLine();
 		System.out.println(resposta);
