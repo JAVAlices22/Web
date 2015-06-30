@@ -1,1 +1,107 @@
-marcel cabaço
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Client {
+	private static char tabuleiro[][] = new char[8][8];
+	private static String resposta;
+	
+	public static void main (String[] args) throws Exception{
+		Socket soc = new Socket("161.24.24.36", 3000);
+		PrintStream ps = new PrintStream(soc.getOutputStream());
+		InputStreamReader ir = new InputStreamReader(soc.getInputStream());
+		BufferedReader br = new BufferedReader(ir);
+		Scanner scan = new Scanner(System.in);
+		
+		int x0, x1, y0, y1;
+		
+		resposta = br.readLine();
+		System.out.println(resposta);
+		updatePosition("RNBQKBNRPPPPPPPP--------------------------------pppppppprnbqkbnr");
+		print();
+		if(resposta.matches("nao")){
+			while(!resposta.matches("afogamento") && !resposta.matches("Vitoria das brancas.") 
+					&& !resposta.matches("Vitoria das pretas.")){
+				x0 = scan.nextInt();
+				y0 = scan.nextInt();
+				x1 = scan.nextInt();
+				y1 = scan.nextInt();
+				ps.print(x0);
+				ps.print(y0);
+				ps.print(x1);
+				ps.print(y1);
+				System.out.printf("%d %d %d %d \n", x0, y0, x1, y1);
+
+				resposta = br.readLine();
+				if(!resposta.matches("bizonhou")){
+					if(updatePosition(resposta))
+						break;
+					print();
+					resposta = br.readLine();
+					if(updatePosition(resposta))
+						break;
+					print();
+				}
+			}
+		}
+		else{
+			while(!resposta.matches("afogamento") && !resposta.matches("Vitoria das brancas.") 
+					&& !resposta.matches("Vitoria das pretas.")){
+				if(!resposta.matches("bizonhou")){	
+					resposta = br.readLine();
+					if(updatePosition(resposta))
+						break;
+					print();
+				}
+				x0 = scan.nextInt();
+				y0 = scan.nextInt();
+				x1 = scan.nextInt();
+				y1 = scan.nextInt();
+				ps.print(x0);
+				ps.print(y0);
+				ps.print(x1);
+				ps.print(y1);
+				resposta = br.readLine();
+				if(!resposta.matches("bizonhou")){
+					if(updatePosition(resposta))
+						break;
+					print();
+				}
+			}
+		}
+		System.out.println(resposta);
+	}
+
+	
+	private static boolean updatePosition(String s){
+		char position[] = s.toCharArray();
+		boolean acabou = false;
+		if(position[0] == '0')
+			acabou = true;
+		for(int i=7; i>=0; i--){
+			for(int j=0; j<8; j++){
+				tabuleiro[i][j] = position[i*8 + j+1];
+			}
+		}
+		return acabou;
+	}
+	
+	private static void print(){
+		for(int i=7; i>=0; i--){
+			for(int j=0; j<8; j++){
+				System.out.printf(" %c ", tabuleiro[i][j]);
+				if(j==7)
+					System.out.printf("\n\n");
+					
+			}
+				
+		}
+	}
+	
+	public Client() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
