@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Client {
 	private static char tabuleiro[][] = new char[8][8];
-	private static String resposta;
+	private static String resposta = "qualquer coisa";
+	private static int option=0;
 	
 	public static void main (String[] args) throws Exception{
 		//Conectar ao servidor e abrir as streams de comunicação
@@ -18,12 +19,22 @@ public class Client {
 		
 		int x0, x1, y0, y1;
 		
+		while(!resposta.matches("sucesso")){
+			resposta = br.readLine();
+			System.out.println(resposta);
+			option = scan.nextInt();
+			scan.nextLine();
+			System.out.println(option);
+			ps.println(option);
+			resposta = br.readLine();
+			System.out.println(resposta);
+			ps.println(scan.nextLine());
+			ps.println(scan.nextLine());
+			resposta = br.readLine();
+		}
+		
+		
 		//Login
-		resposta = br.readLine();
-		System.out.println(resposta);
-		ps.println(scan.nextLine());
-		ps.println(scan.nextLine());
-		resposta = br.readLine();
 		if(resposta.matches("falha")){
 			System.out.println("Conexão mal sucedida.");
 			return;
@@ -135,5 +146,4 @@ public class Client {
 	public Client() {
 		// TODO Auto-generated constructor stub
 	}
-
 }
