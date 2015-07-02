@@ -1,4 +1,4 @@
-package lógica;
+package lÃ³gica;
 
 public class Pawn extends Piece{
 	private int originalPosition;
@@ -28,14 +28,14 @@ public class Pawn extends Piece{
 			i = posx+1;
 			j = posy+1;
 			if(i>=0 && i<8 && j>=0 && j<8){
-				if(spot[i][j] != null && spot[i][j].color != color){ //captura à direita
+				if(spot[i][j] != null && spot[i][j].color != color){ //captura Ã  direita
 					valid[i][j] = true;
 				}
 			}
 			i = posx+1;
 			j = posy-1;
 			if(i>=0 && i<8 && j>=0 && j<8){
-				if(spot[i][j] != null && spot[i][j].color != color){ //captura à esquerda
+				if(spot[i][j] != null && spot[i][j].color != color){ //captura Ã  esquerda
 					valid[i][j] = true;
 				}
 			}
@@ -64,14 +64,14 @@ public class Pawn extends Piece{
 			i = posx-1;
 			j = posy+1;
 			if(i>=0 && i<8 && j>=0 && j<8){
-				if(spot[i][j] != null && spot[i][j].color != color){ //captura à direita
+				if(spot[i][j] != null && spot[i][j].color != color){ //captura Ã  direita
 					valid[i][j] = true;
 				}
 			}
 			i = posx-1;
 			j = posy-1;
 			if(i>=0 && i<8 && j>=0 && j<8){
-				if(spot[i][j] != null && spot[i][j].color != color){ //captura à esquerda
+				if(spot[i][j] != null && spot[i][j].color != color){ //captura Ã  esquerda
 					valid[i][j] = true;
 				}
 			}
@@ -89,7 +89,7 @@ public class Pawn extends Piece{
 			
 	
 	Pawn(int x0, int y0, int cor) {
-		type = pawn;
+		type = Constants.pawn;
 		color = cor;
 		posx = x0;
 		posy = y0;
@@ -100,7 +100,7 @@ public class Pawn extends Piece{
 		movedTwo = false;
 	}
 	
-	Pawn(Pawn p){ //construtor de cópia
+	Pawn(Pawn p){ //construtor de cÃ³pia
 		type = p.type;
 		color = p.color;
 		posx = p.posx;
