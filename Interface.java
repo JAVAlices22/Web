@@ -1,17 +1,7 @@
-package lógica;
+package lÃ³gica;
 import java.util.Scanner;
 
 public abstract class Interface {
-	public static final int pawn = 1;
-	public static final int knight = 2;
-	public static final int bishop = 3;
-	public static final int rook = 4;
-	public static final int queen = 5;
-	public static final int king = 6;
-	
-	public static final int white = 0;
-	public static final int black = 1;
-	
 	
 	private static boolean stalemate = false;
 	private static boolean checkmate = false;
@@ -23,29 +13,29 @@ public abstract class Interface {
 				if(b.spot[i][j] == null)
 					tabuleiro[i][j] = '-';
 				else{
-					if(b.spot[i][j].type == pawn && b.spot[i][j].color == white)
+					if(b.spot[i][j].type == Constants.pawn && b.spot[i][j].color == Constants.white)
 						tabuleiro[i][j] = 'P';
-					if(b.spot[i][j].type == pawn && b.spot[i][j].color == black)
+					if(b.spot[i][j].type == Constants.pawn && b.spot[i][j].color == Constants.black)
 						tabuleiro[i][j] = 'p';
-					if(b.spot[i][j].type == knight && b.spot[i][j].color == white)
+					if(b.spot[i][j].type == Constants.knight && b.spot[i][j].color == Constants.white)
 						tabuleiro[i][j] = 'N';
-					if(b.spot[i][j].type == knight && b.spot[i][j].color == black)
+					if(b.spot[i][j].type == Constants.knight && b.spot[i][j].color == Constants.black)
 						tabuleiro[i][j] = 'n';
-					if(b.spot[i][j].type == bishop && b.spot[i][j].color == white)
+					if(b.spot[i][j].type == Constants.bishop && b.spot[i][j].color == Constants.white)
 						tabuleiro[i][j] = 'B';
-					if(b.spot[i][j].type == bishop && b.spot[i][j].color == black)
+					if(b.spot[i][j].type == Constants.bishop && b.spot[i][j].color == Constants.black)
 						tabuleiro[i][j] = 'b';
-					if(b.spot[i][j].type == rook && b.spot[i][j].color == white)
+					if(b.spot[i][j].type == Constants.rook && b.spot[i][j].color == Constants.white)
 						tabuleiro[i][j] = 'R';
-					if(b.spot[i][j].type == rook && b.spot[i][j].color == black)
+					if(b.spot[i][j].type == Constants.rook && b.spot[i][j].color == Constants.black)
 						tabuleiro[i][j] = 'r';
-					if(b.spot[i][j].type == queen && b.spot[i][j].color == white)
+					if(b.spot[i][j].type == Constants.queen && b.spot[i][j].color == Constants.white)
 						tabuleiro[i][j] = 'Q';
-					if(b.spot[i][j].type == queen && b.spot[i][j].color == black)
+					if(b.spot[i][j].type == Constants.queen && b.spot[i][j].color == Constants.black)
 						tabuleiro[i][j] = 'q';
-					if(b.spot[i][j].type == king && b.spot[i][j].color == white)
+					if(b.spot[i][j].type == Constants.king && b.spot[i][j].color == Constants.white)
 						tabuleiro[i][j] = 'K';
-					if(b.spot[i][j].type == king && b.spot[i][j].color == black)
+					if(b.spot[i][j].type == Constants.king && b.spot[i][j].color == Constants.black)
 						tabuleiro[i][j] = 'k';
 				}
 			}
@@ -93,12 +83,10 @@ public abstract class Interface {
 		if(stalemate)
 			System.out.println("Afogamento.");
 		if(checkmate){
-			if(b.turn == white)
-				System.out.println("Vitória das pretas.");
-			if(b.turn == black)
-				System.out.println("Vitória das brancas.");
+			if(b.turn == Constants.white)
+				System.out.println("VitÃ³ria das pretas.");
+			if(b.turn == Constants.black)
+				System.out.println("VitÃ³ria das brancas.");
 		}	
 	}
 }
-
-
