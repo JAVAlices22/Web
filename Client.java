@@ -4,18 +4,22 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 public class Client {
-	private static char tabuleiro[][] = new char[8][8];
+	public static char tabuleiro[][] = new char[8][8];
 	private static String resposta = "qualquer coisa";
 	private static int option=0;
+    private PrintStream ps;
+    private InputStreamReader ir;
+    private BufferedReader br;
+    private Scanner scan = new Scanner(System.in);
+    private JFrame frame = new JFrame("WebChess");
+
 	
-	public static void main (String[] args) throws Exception{
+	public void run() throws Exception{
 		//Conectar ao servidor e abrir as streams de comunicação
-		Socket soc = new Socket("161.24.24.36", 3000);
-		PrintStream ps = new PrintStream(soc.getOutputStream());
-		InputStreamReader ir = new InputStreamReader(soc.getInputStream());
-		BufferedReader br = new BufferedReader(ir);
-		Scanner scan = new Scanner(System.in);
+		//Socket soc = new Socket("161.24.24.36", 3000);
 		
 		int x0, x1, y0, y1;
 		
@@ -109,7 +113,7 @@ public class Client {
 	//Analisa a string enviada pelo servidor após uma jogada e atualiza o tabuleiro
 	//O primeiro caracter indica se o jogo acabou (0 indica acabou e 1 indica que não acabou)
 	//Os demais representam a nova posição das peças
-	private static boolean updatePosition(String s){
+	private boolean updatePosition(String s){
 		char position[] = s.toCharArray();
 		boolean acabou = false;
 		if(position[0] == '0')
@@ -123,7 +127,17 @@ public class Client {
 	}
 	
 	//Imprime o tabuleiro
-	private static void print(){
+	private void print(){
+		//new TabuleiroRun(tabuleiro).run();
+		
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
+        frame.add(new GUI(tabuleiro));  
+        frame.setSize(615, 640);  
+        frame.validate();  
+        frame.setLocationRelativeTo(null); 
+        frame.setVisible(true);  
+		
+		
 		for(int i=7; i>=0; i--){
 			for(int j=0; j<8; j++){
 				System.out.printf(" %c ", tabuleiro[i][j]);
@@ -135,7 +149,9 @@ public class Client {
 		}
 	}
 	
-	public Client() {
-		// TODO Auto-generated constructor stub
+	public Client(Socket soc) throws Exception {
+	    ps = new PrintStream(soc.getOutputStream());
+            ir = new InputStreamReader(soc.getInputStream());
+            br = new BufferedReader(ir);
 	}
 }
