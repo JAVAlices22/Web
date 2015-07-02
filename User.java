@@ -1,8 +1,10 @@
 package database;
 
-public class User {
-	String login;
-	String senha;
+import java.io.Serializable;
+
+public class User implements Serializable {
+	public String login;
+	public String senha;
 	
 	
 	public User(String l, String s) {
