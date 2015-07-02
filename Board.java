@@ -1,17 +1,7 @@
-package lógica;
+package lÃ³gica;
 import java.util.Scanner;
 
 public class Board {
-	public static final int pawn = 1;
-	public static final int knight = 2;
-	public static final int bishop = 3;
-	public static final int rook = 4;
-	public static final int queen = 5;
-	public static final int king = 6;
-	
-	public static final int white = 0;
-	public static final int black = 1;
-	
 	public Piece[][] spot = new Piece[8][8];
 	private Piece[][] temp = new Piece[8][8];
 	public static int moveCount;
@@ -32,52 +22,52 @@ public class Board {
 		whiteKingPosY = 4;
 		blackKingPosX = 7;
 		blackKingPosY = 4;
-		turn = white;
-		spot[0][0] = new Rook(0,0,white);
-		spot[0][7] = new Rook(0,7,white);
-		spot[0][1] = new Knight(0,1,white);
-		spot[0][6] = new Knight(0,6,white);
-		spot[0][2] = new Bishop(0,2,white);
-		spot[0][5] = new Bishop(0,5,white);
-		spot[0][3] = new Queen(0,3,white);
-		spot[0][4] = new King(0,4, white);
+		turn = Constants.white;
+		spot[0][0] = new Rook(0,0,Constants.white);
+		spot[0][7] = new Rook(0,7,Constants.white);
+		spot[0][1] = new Knight(0,1,Constants.white);
+		spot[0][6] = new Knight(0,6,Constants.white);
+		spot[0][2] = new Bishop(0,2,Constants.white);
+		spot[0][5] = new Bishop(0,5,Constants.white);
+		spot[0][3] = new Queen(0,3,Constants.white);
+		spot[0][4] = new King(0,4,Constants.white);
 		for(int i=0; i<8; i++)
-			spot[1][i] = new Pawn(1,i,white);
+			spot[1][i] = new Pawn(1,i,Constants.white);
 		for(int j=2; j<6; j++){
 			for(int k=0; k<8; k++)
 				spot[j][k] = null;
 		}
-		spot[7][0] = new Rook(7,0,black);
-		spot[7][7] = new Rook(7,7,black);
-		spot[7][1] = new Knight(7,1,black);
-		spot[7][6] = new Knight(7,6,black);
-		spot[7][2] = new Bishop(7,2,black);
-		spot[7][5] = new Bishop(7,5,black);
-		spot[7][3] = new Queen(7,3,black);
-		spot[7][4] = new King(7,4,black);
+		spot[7][0] = new Rook(7,0,Constants.black);
+		spot[7][7] = new Rook(7,7,Constants.black);
+		spot[7][1] = new Knight(7,1,Constants.black);
+		spot[7][6] = new Knight(7,6,Constants.black);
+		spot[7][2] = new Bishop(7,2,Constants.black);
+		spot[7][5] = new Bishop(7,5,Constants.black);
+		spot[7][3] = new Queen(7,3,Constants.black);
+		spot[7][4] = new King(7,4,Constants.black);
 		for(int i=0; i<8; i++)
-			spot[6][i] = new Pawn(6,i,black);
+			spot[6][i] = new Pawn(6,i,Constants.black);
 		updateBoard(whiteKingPosX,whiteKingPosY,blackKingPosX,blackKingPosY);
 	}
 	
-	//Mover uma peça
-	public void tryMove(int x0, int y0, int x1, int y1){	
-		//Copiar tabuleiro, as posições dos reis para serem usados pelo método undoMove
+	//Mover uma peÃ§a
+	public void tryMove(int x0, int y0, int x1, int y1){
+		//Copiar tabuleiro, as posiÃ§Ãµes dos reis para serem usados pelo mÃ©todo undoMove
 		for(int i=0; i<8; i++){
 			for(int j=0; j<8; j++){
 				if(spot[i][j] == null)
 					temp[i][j] = null;
-				else if(spot[i][j].type == pawn)
+				else if(spot[i][j].type == Constants.pawn)
 					temp[i][j] = new Pawn((Pawn) spot[i][j]);
-				else if(spot[i][j].type == knight)
+				else if(spot[i][j].type == Constants.knight)
 					temp[i][j] = new Knight((Knight) spot[i][j]);
-				else if(spot[i][j].type == bishop)
+				else if(spot[i][j].type == Constants.bishop)
 					temp[i][j] = new Bishop((Bishop) spot[i][j]);
-				else if(spot[i][j].type == rook)
+				else if(spot[i][j].type == Constants.rook)
 					temp[i][j] = new Rook((Rook) spot[i][j]);
-				else if(spot[i][j].type == queen)
+				else if(spot[i][j].type == Constants.queen)
 					temp[i][j] = new Queen((Queen) spot[i][j]);
-				else if(spot[i][j].type == king)
+				else if(spot[i][j].type == Constants.king)
 					temp[i][j] = new King((King) spot[i][j]);
 			}
 		}
@@ -86,23 +76,23 @@ public class Board {
 		blackKingPosX0 = blackKingPosX;
 		blackKingPosY0 = blackKingPosY;
 
-		//Mover, caso seja um movimento possível
+		//Mover, caso seja um movimento possÃ­vel
 		if(spot[x0][y0] != null && spot[x0][y0].valid[x1][y1] == true && spot[x0][y0].color == turn){
-			//Parâmetros a serem revisados pelo método validateMove
+			//ParÃ¢metros a serem revisados pelo mÃ©todo validateMove
 			moveCount++; 
 			turn = moveCount % 2;
 			
 			//Movimentos
-			if(spot[x0][y0].type == pawn && spot[x1][y1]==null && y0 != y1){ //Ocorreu en passant
+			if(spot[x0][y0].type == Constants.pawn && spot[x1][y1]==null && y0 != y1){ //Ocorreu en passant
 				spot[x0][y0].isMoved = true;
 				spot[x0][y0].lastMoved = moveCount;
 				spot[x1][y1] = spot[x0][y0];
 				spot[x1][y1].posx = x1;
 				spot[x1][y1].posy = y1;
 				spot[x0][y0] = null;
-				spot[x0][y1] = null; //Remover o peão capturado
+				spot[x0][y1] = null; //Remover o peÃ£o capturado
 			}
-			else if(spot[x0][y0].type == king && Math.abs(y1-y0) == 2){ //Ocorreu Rock
+			else if(spot[x0][y0].type == Constants.king && Math.abs(y1-y0) == 2){ //Ocorreu Rock
 				spot[x0][y0].isMoved = true;
 				spot[x0][y0].lastMoved = moveCount;
 				spot[x1][y1] = spot[x0][y0];
@@ -153,20 +143,20 @@ public class Board {
 			}
 		}
 		
-		if(spot[x1][y1] != null && spot[x1][y1].type == pawn && Math.abs(x1 - x0) == 2) //Marcar a possibilidade de en passant
+		if(spot[x1][y1] != null && spot[x1][y1].type == Constants.pawn && Math.abs(x1 - x0) == 2) //Marcar a possibilidade de en passant
 			spot[x1][y1].movedTwo = true;
 		
-		if(spot[x1][y1] != null && spot[x1][y1].type == pawn && (x1==7 || x1==0)){ //Promoção de peão
-			System.out.println("Promoção: Cavalo=2 Bispo=3 Torre=4 Dama=qualquer outra coisa, bizonho");
+		if(spot[x1][y1] != null && spot[x1][y1].type == Constants.pawn && (x1==7 || x1==0)){ //PromoÃ§Ã£o de peÃ£o
+			System.out.println("PromoÃ§Ã£o: Cavalo=2 Bispo=3 Torre=4 Dama=qualquer outra coisa, bizonho");
 			Scanner s = new Scanner(System.in);
 			switch(s.nextInt()){
-				case knight:
+				case Constants.knight:
 					spot[x1][y1] =  new Knight(x1,y1,spot[x1][y1].color);
 					break;
-				case bishop:
+				case Constants.bishop:
 					spot[x1][y1] =  new Bishop(x1,y1,spot[x1][y1].color);
 					break;
-				case rook:
+				case Constants.rook:
 					spot[x1][y1] =  new Rook(x1,y1,spot[x1][y1].color);
 					break;
 				default:
@@ -174,18 +164,18 @@ public class Board {
 			}
 		}
 		
-		if(spot[x1][y1] != null && spot[x1][y1].type == king && spot[x1][y1].color == white){ //Atualizar a posição do rei para as verificaçoes de jogada válida
+		if(spot[x1][y1] != null && spot[x1][y1].type == Constants.king && spot[x1][y1].color == Constants.white){ //Atualizar a posiÃ§Ã£o do rei para as verificaÃ§oes de jogada vÃ¡lida
 			whiteKingPosX = x1;
 			whiteKingPosY = y1;
 		}
-		if(spot[x1][y1] != null && spot[x1][y1].type == king && spot[x1][y1].color == black){
+		if(spot[x1][y1] != null && spot[x1][y1].type == Constants.king && spot[x1][y1].color == Constants.black){
 			blackKingPosX = x1;
 			blackKingPosY = y1;
 		}
 		updateBoard(whiteKingPosX,whiteKingPosY,blackKingPosX,blackKingPosY);
 	}
 	
-	//Atualizar as posições válidas de todas as peças
+	//Atualizar as posiÃ§Ãµes vÃ¡lidas de todas as peÃ§as
 	private void updateBoard(int whiteKingPosX, int whiteKingPosY, int blackKingPosX, int blackKingPosY){	
 		for(int i=0; i<8; i++){ 
 			for(int j=0; j<8; j++){
@@ -193,7 +183,7 @@ public class Board {
 					spot[i][j].isValid(spot);
 			}
 		}
-		spot[whiteKingPosX][whiteKingPosY].isValid(spot); //Redundância necessária para o verificar o rock
+		spot[whiteKingPosX][whiteKingPosY].isValid(spot); //RedundÃ¢ncia necessÃ¡ria para o verificar o rock
 		spot[blackKingPosX][blackKingPosY].isValid(spot);
 	}
 	
@@ -203,40 +193,40 @@ public class Board {
 		spot[blackKingPosX][blackKingPosY].isChecked = false;
 		for(int i=0; i<8; i++){ 
 			for(int j=0; j<8; j++){
-				if(spot[i][j] != null && spot[i][j].color != white && spot[i][j].valid[whiteKingPosX][whiteKingPosY])
+				if(spot[i][j] != null && spot[i][j].color != Constants.white && spot[i][j].valid[whiteKingPosX][whiteKingPosY])
 					spot[whiteKingPosX][whiteKingPosY].isChecked = true;
-				if(spot[i][j] != null && spot[i][j].color != black && spot[i][j].valid[blackKingPosX][blackKingPosY])
+				if(spot[i][j] != null && spot[i][j].color != Constants.black && spot[i][j].valid[blackKingPosX][blackKingPosY])
 					spot[blackKingPosX][blackKingPosY].isChecked = true;
 			}
 		}
 	}
 	
-	//Verificar se o jogador pos o próprio rei em perigo. Retorna true em caso afirmativo.
+	//Verificar se o jogador pos o prÃ³prio rei em perigo. Retorna true em caso afirmativo.
 	public boolean isInDanger(){
-		if(turn == black && spot[whiteKingPosX][whiteKingPosY].isChecked)
+		if(turn == Constants.black && spot[whiteKingPosX][whiteKingPosY].isChecked)
 			return true;
-		if(turn == white && spot[blackKingPosX][blackKingPosY].isChecked)
+		if(turn == Constants.white && spot[blackKingPosX][blackKingPosY].isChecked)
 			return true;
 		return false;
 	}
 	
-	//Restaurar as configurações do tabuleiro para as da última jogada válida
+	//Restaurar as configuraÃ§Ãµes do tabuleiro para as da Ãºltima jogada vÃ¡lida
 	public void undoMove(){
 		for(int i=0; i<8; i++){
 			for(int j=0; j<8; j++){
 				if(temp[i][j] == null)
 					spot[i][j] = null;
-				else if(temp[i][j].type == pawn)
+				else if(temp[i][j].type == Constants.pawn)
 					spot[i][j] = new Pawn((Pawn) temp[i][j]);
-				else if(temp[i][j].type == knight)
+				else if(temp[i][j].type == Constants.knight)
 					spot[i][j] = new Knight((Knight) temp[i][j]);
-				else if(temp[i][j].type == bishop)
+				else if(temp[i][j].type == Constants.bishop)
 					spot[i][j] = new Bishop((Bishop) temp[i][j]);
-				else if(temp[i][j].type == rook)
+				else if(temp[i][j].type == Constants.rook)
 					spot[i][j] = new Rook((Rook) temp[i][j]);
-				else if(temp[i][j].type == queen)
+				else if(temp[i][j].type == Constants.queen)
 					spot[i][j] = new Queen((Queen) temp[i][j]);
-				else if(temp[i][j].type == king)
+				else if(temp[i][j].type == Constants.king)
 					spot[i][j] = new King((King) temp[i][j]);
 			}
 		}
@@ -251,16 +241,16 @@ public class Board {
 		updateBoard(whiteKingPosX,whiteKingPosY,blackKingPosX,blackKingPosY);
 	}
 	
-	//Verifica se houve afogamento. Retorna true se não for o caso.
+	//Verifica se houve afogamento. Retorna true se nÃ£o for o caso.
 	public boolean isNotStalemate(){
 		boolean canMove = true;
-		if(turn == white && !spot[whiteKingPosX][whiteKingPosY].isChecked){
+		if(turn == Constants.white && !spot[whiteKingPosX][whiteKingPosY].isChecked){
 			canMove = false;
 			for(int i=0; i<8  && !canMove; i++){
 				for(int j=0; j<8  && !canMove; j++){
 					for(int k=0; k<8  && !canMove; k++){
 						for(int l=0; l<8  && !canMove; l++){
-							if(spot[i][j] != null && spot[i][j].color == white && spot[i][j].valid[k][l]){
+							if(spot[i][j] != null && spot[i][j].color == Constants.white && spot[i][j].valid[k][l]){
 								tryMove(i,j,k,l);
 								verifyCheck();
 								if(!isInDanger())
@@ -272,13 +262,13 @@ public class Board {
 				}
 			}
 		}
-		if(turn == black && !spot[blackKingPosX][blackKingPosY].isChecked){
+		if(turn == Constants.black && !spot[blackKingPosX][blackKingPosY].isChecked){
 			canMove = false;
 			for(int i=0; i<8  && !canMove; i++){
 				for(int j=0; j<8  && !canMove; j++){
 					for(int k=0; k<8  && !canMove; k++){
 						for(int l=0; l<8  && !canMove; l++){
-							if(spot[i][j] != null && spot[i][j].color == black && spot[i][j].valid[k][l]){
+							if(spot[i][j] != null && spot[i][j].color == Constants.black && spot[i][j].valid[k][l]){
 								tryMove(i,j,k,l);
 								verifyCheck();
 								if(!isInDanger())
@@ -293,16 +283,16 @@ public class Board {
 		return canMove;
 	}
 	
-	//Verifica se houve xeque-mate. Retorna true se não for o caso.
+	//Verifica se houve xeque-mate. Retorna true se nÃ£o for o caso.
 	public boolean isNotCheckmate(){
 		boolean canMove = true;
-		if(turn == white && spot[whiteKingPosX][whiteKingPosY].isChecked){
+		if(turn == Constants.white && spot[whiteKingPosX][whiteKingPosY].isChecked){
 			canMove = false;
 			for(int i=0; i<8  && !canMove; i++){
 				for(int j=0; j<8  && !canMove; j++){
 					for(int k=0; k<8  && !canMove; k++){
 						for(int l=0; l<8  && !canMove; l++){
-							if(spot[i][j] != null && spot[i][j].color == white  && spot[i][j].valid[k][l]){
+							if(spot[i][j] != null && spot[i][j].color == Constants.white  && spot[i][j].valid[k][l]){
 								tryMove(i,j,k,l);
 								verifyCheck();
 								if(!isInDanger())
@@ -314,13 +304,13 @@ public class Board {
 				}
 			}
 		}
-		if(turn == black && spot[blackKingPosX][blackKingPosY].isChecked){
+		if(turn == Constants.black && spot[blackKingPosX][blackKingPosY].isChecked){
 			canMove = false;
 			for(int i=0; i<8  && !canMove; i++){
 				for(int j=0; j<8  && !canMove; j++){
 					for(int k=0; k<8  && !canMove; k++){
 						for(int l=0; l<8  && !canMove; l++){
-							if(spot[i][j] != null && spot[i][j].color == black  && spot[i][j].valid[k][l]){
+							if(spot[i][j] != null && spot[i][j].color == Constants.black  && spot[i][j].valid[k][l]){
 								tryMove(i,j,k,l);
 								verifyCheck();
 								if(!isInDanger())
@@ -335,5 +325,3 @@ public class Board {
 		return canMove;
 	}
 }
-
-
