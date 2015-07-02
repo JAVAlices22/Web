@@ -19,7 +19,7 @@ public class Database{
 	
 	public boolean deleteUser(String l, String s){
 		User u = new User(l, s);
-		if(!checkUser(l, s)){
+		if(checkUser(l, s)){
 			usuarios.remove(u);
 			return true;
 		}
@@ -36,8 +36,8 @@ public class Database{
 	
     public void save(){
         try{
-        	FileOutputStream arquivoGrav = new FileOutputStream("database.dat"); //gera arquivo para armazenar objeto
-        	ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav); //classe responsável por inserir os objetos
+            FileOutputStream arquivoGrav = new FileOutputStream("database.dat"); //gera arquivo para armazenar objeto
+            ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav); //classe responsável por inserir os objetos
             objGravar.writeObject(usuarios); //grava o objeto L no arquivo
             objGravar.flush();
             objGravar.close();
