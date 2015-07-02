@@ -1,4 +1,4 @@
-package lógica;
+package lÃ³gica;
 
 public class Knight extends Piece{
 
@@ -90,7 +90,7 @@ public class Knight extends Piece{
 	}
 	
 	Knight(int x0, int y0, int cor) {
-		type = knight;
+		type = Constants.knight;
 		color = cor;
 		posx = x0;
 		posy = y0;
@@ -100,7 +100,7 @@ public class Knight extends Piece{
 		movedTwo = false;
 	}
 	
-	Knight(Knight p){ //construtor de cópia
+	Knight(Knight p){ //construtor de cÃ³pia
 		type = p.type;
 		color = p.color;
 		posx = p.posx;
