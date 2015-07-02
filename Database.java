@@ -1,11 +1,12 @@
 package database;
 
-import java.io.Serializable;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Database implements Serializable{
+public class Database{
 	
-	private ArrayList <User> usuarios;
+	public ArrayList <User> usuarios;
 	
 	public boolean addUser(String l, String s){
 		User u = new User(l, s);
@@ -32,6 +33,22 @@ public class Database implements Serializable{
 		}
 		return false;
 	}
+	
+    public void save(){
+        try{
+        	FileOutputStream arquivoGrav = new FileOutputStream("database.dat"); //gera arquivo para armazenar objeto
+        	ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav); //classe responsável por inserir os objetos
+            objGravar.writeObject(usuarios); //grava o objeto L no arquivo
+            objGravar.flush();
+            objGravar.close();
+            arquivoGrav.flush();
+            arquivoGrav.close();
+        	System.out.println("Foi salvo com sucesso.");
+   }catch(Exception ex){
+	   ex.printStackTrace();
+        }
+    }
+    
 	public Database() {
 		usuarios = new ArrayList <User>();
 	}
