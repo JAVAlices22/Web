@@ -19,12 +19,12 @@ public class Client {
 		
 		int x0, x1, y0, y1;
 		
+		//Inicialização
 		while(!resposta.matches("sucesso")){
 			resposta = br.readLine();
 			System.out.println(resposta);
 			option = scan.nextInt();
 			scan.nextLine();
-			System.out.println(option);
 			ps.println(option);
 			resposta = br.readLine();
 			System.out.println(resposta);
@@ -32,14 +32,6 @@ public class Client {
 			ps.println(scan.nextLine());
 			resposta = br.readLine();
 		}
-		
-		
-		//Login
-		if(resposta.matches("falha")){
-			System.out.println("Conexão mal sucedida.");
-			return;
-		}
-		
 		
 		 //Atribuir cor das peças ao cliente e inicializar tabuleiro
 		resposta = br.readLine();
