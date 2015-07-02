@@ -1,12 +1,6 @@
-package lÛgica;
+package l√≥gica;
 
 public abstract class Piece {
-	public static final int pawn = 1;
-	public static final int knight = 2;
-	public static final int bishop = 3;
-	public static final int rook = 4;
-	public static final int queen = 5;
-	public static final int king = 6;
 	
 	//figura
 	public int type;
@@ -14,9 +8,9 @@ public abstract class Piece {
 	public int posx;
 	public int posy;
 	public int lastMoved; //Para tratar o caso en passant para peoes
-	public boolean isMoved; //Para peÁas com movimentos que dependem de n„o terem sido ainda movidas.
+	public boolean movedTwo; //Para tratar o caso en passant para os pe√µes
+	public boolean isMoved; //Para pe√ßas com movimentos que dependem de n√£o terem sido ainda movidas.
 	public boolean isChecked;
-	public boolean movedTwo; //Para tratar o caso en passant para os peıes
 
 	
 	public boolean valid[][] = new boolean[8][8];
