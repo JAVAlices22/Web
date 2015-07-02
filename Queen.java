@@ -1,4 +1,4 @@
-package lógica;
+package lÃ³gica;
 
 public class Queen extends Piece {
 	
@@ -37,7 +37,7 @@ public class Queen extends Piece {
 				blocked = true;
 		}
 		blocked = false;
-		for(i = posy+1; i<8 && !blocked; i++){ //movimento na horiontal à direita
+		for(i = posy+1; i<8 && !blocked; i++){ //movimento na horiontal Ã  direita
 			if(spot[posx][i] == null)
 				valid[posx][i] = true;
 			else if(spot[posx][i].color != color){
@@ -48,7 +48,7 @@ public class Queen extends Piece {
 				blocked = true;
 		}
 		blocked = false;
-		for(i = posy-1; i>=0 && !blocked; i--){ //movimento na horiontal à esquerda
+		for(i = posy-1; i>=0 && !blocked; i--){ //movimento na horiontal Ã  esquerda
 			if(spot[posx][i] == null)
 				valid[posx][i] = true;
 			else if(spot[posx][i].color != color){
@@ -106,7 +106,7 @@ public class Queen extends Piece {
 	}
 	
 	Queen(int x0, int y0, int cor) {
-		type = queen;
+		type = Constants.queen;
 		color = cor;
 		posx = x0;
 		posy = y0;
@@ -116,7 +116,7 @@ public class Queen extends Piece {
 		movedTwo = false;
 	}
 	
-	Queen(Queen p){ //construtor de cópia
+	Queen(Queen p){ //construtor de cÃ³pia
 		type = p.type;
 		color = p.color;
 		posx = p.posx;
