@@ -1,4 +1,4 @@
-package lógica;
+package lÃ³gica;
 
 public class King extends Piece{
 	private boolean isAttacked;
@@ -34,7 +34,7 @@ public class King extends Piece{
 		
 		i= posx;
 		j= posy+1;
-		if(i>=0 && i<8 && j>=0 && j<8){ //movimento horizontal à direita
+		if(i>=0 && i<8 && j>=0 && j<8){ //movimento horizontal Ã  direita
 			if(spot[i][j] == null)
 				valid[i][j] = true;
 			else if(spot[i][j].color != color)
@@ -43,7 +43,7 @@ public class King extends Piece{
 		
 		i= posx;
 		j= posy-1;
-		if(i>=0 && i<8 && j>=0 && j<8){ //movimento horizontal à esquerda
+		if(i>=0 && i<8 && j>=0 && j<8){ //movimento horizontal Ã  esquerda
 			if(spot[i][j] == null)
 				valid[i][j] = true;
 			else if(spot[i][j].color != color)
@@ -93,7 +93,7 @@ public class King extends Piece{
 					for(int k=0; k<8; k++){ //Verificar ataques
 						for(int l=0; l<8; l++){
 							if(spot[k][l] != null && spot[k][l].color != color){
-								if(spot[k][l].type == pawn && (l == 6 || l == 5 || l == 4 || l == 3))
+								if(spot[k][l].type == Constants.pawn && (l == 6 || l == 5 || l == 4 || l == 3))
 									isAttacked = true;
 								if(spot[k][l].valid[posx][4] || spot[k][l].valid[posx][5])
 									isAttacked = true;
@@ -109,7 +109,7 @@ public class King extends Piece{
 					for(int k=0; k<8; k++){ //Verificar ataques
 						for(int l=0; l<8; l++){
 							if(spot[k][l] != null && spot[k][l].color != color){
-								if(spot[k][l].type == pawn && (l == 3 || l == 2 || l == 1 || l == 0))
+								if(spot[k][l].type == Constants.pawn && (l == 3 || l == 2 || l == 1 || l == 0))
 									isAttacked = true;
 								if(spot[k][l].valid[posx][1] || spot[k][l].valid[posx][2])
 									isAttacked = true;
@@ -128,7 +128,7 @@ public class King extends Piece{
 					for(int k=0; k<8; k++){ //Verificar ataque
 						for(int l=0; l<8; l++){
 							if(spot[k][l] != null && spot[k][l].color != color){
-								if(spot[k][l].type == pawn && (l == 4 || l == 3 || l == 2 || l == 1))
+								if(spot[k][l].type == Constants.pawn && (l == 4 || l == 3 || l == 2 || l == 1))
 									isAttacked = true;
 								if(spot[k][l].valid[posx][3] || spot[k][l].valid[posx][2])
 									isAttacked = true;
@@ -144,7 +144,7 @@ public class King extends Piece{
 					for(int k=0; k<8; k++){ //Verificar ataque
 						for(int l=0; l<8; l++){
 							if(spot[k][l] != null && spot[k][l].color != color){
-								if(spot[k][l].type == pawn && (l == 4 || l == 5 || l == 6 || l == 7))
+								if(spot[k][l].type == Constants.pawn && (l == 4 || l == 5 || l == 6 || l == 7))
 									isAttacked = true;
 								if(spot[k][l].valid[posx][5] || spot[k][l].valid[posx][6]){
 									isAttacked = true;
@@ -160,7 +160,7 @@ public class King extends Piece{
 	}
 	
 	King(int x0, int y0, int cor) {
-		type = king;
+		type = Constants.king;
 		color = cor;
 		posx = x0;
 		posy = y0;
@@ -170,7 +170,7 @@ public class King extends Piece{
 		movedTwo = false;
 	}
 	
-	King(King p){ //construtor de cópia
+	King(King p){ //construtor de cÃ³pia
 		type = p.type;
 		color = p.color;
 		posx = p.posx;
