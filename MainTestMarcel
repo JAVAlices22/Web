@@ -1,0 +1,23 @@
+import java.net.Socket;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author USUARIO
+ */
+public class MainTest{
+    public static void main(String[] args){
+        try{
+            Socket soc = new Socket("192.168.0.101", 3000);
+            new InterfaceTest(soc).run();
+        }
+        catch(Exception e){
+            
+        }
+    }
+}
